@@ -8,6 +8,13 @@ public class ResponseResult<T> implements Serializable{
 	private Integer state;
 	private String message;
 	private T data;
+	
+	
+	@Override
+	public String toString() {
+		return "ResponseResult [state=" + state + ", message=" + message + ", data=" + data + "]";
+	}
+
 	public ResponseResult(){
 		
 	}

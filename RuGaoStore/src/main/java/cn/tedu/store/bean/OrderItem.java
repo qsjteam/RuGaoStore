@@ -20,6 +20,8 @@ public class OrderItem implements Serializable{
 	private Date createdTime;
 	private String modifiedUser;
 	private Date modifiedTime;
+	
+	
 	public Integer getId() {
 		return id;
 	}

@@ -1,5 +1,7 @@
 package cn.tedu.store.service;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import cn.tedu.store.bean.User;
 import cn.tedu.store.mapper.UserMapper;
 import cn.tedu.store.service.ex.PasswordNotMatchException;
+import cn.tedu.store.service.ex.ServiceException;
 import cn.tedu.store.service.ex.UserNameAlreadyExsitException;
 import cn.tedu.store.service.ex.UserNotFoundException;
 
@@ -109,27 +112,19 @@ public class UserService implements IUserService {
 
 	public void updateUser(Integer id, String username, String email, String phone, Integer gender) {
 		User user = new User();
-		// 判读用户名是否存在
-		User u1 = userMapper.selectByUsername(username);
-		if (u1 == null) {
-			user.setUsername(username);
-		} else {
-			// 用户名存在
-			User u2 = userMapper.selectById(id);
-			if (u2 != null) {
-				// 不修改登录用户名
-				if (u2.getUsername().equals(username)) {
-
-				} else {
-					throw new UserNameAlreadyExsitException("用户名已经存在");
-				}
-			}
-		}
+		user.setUsername(username);
 		user.setId(id);
 		user.setEmail(email);
 		user.setPhone(phone);
 		user.setGender(gender);
-		userMapper.update(user);
+		user.setModifiedUser(username);
+		user.setModifiedTime(new Date());
+		System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::"+user);
+		try {
+			userMapper.update(user);
+		} catch (ServiceException e) {
+			throw new ServiceException("修改失败");
+		}
 	}
 
 	public User getUserById(Integer id) {

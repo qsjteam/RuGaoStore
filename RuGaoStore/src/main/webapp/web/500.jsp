@@ -127,9 +127,6 @@
             <img src="${basePath}/images/footer/ios.png" class="lf">
             <img src="${basePath}/images/footer/android.png" alt="" class="lf"/>
         </div>
-        <div class="download">
-            <img src="${basePath}/images/footer/erweima.png">
-        </div>
 		<!-- 页面底部-备案号 #footer -->
         <div class="record">
             &copy;2018  版权所有 川ICP证xxxxxxxxxxx

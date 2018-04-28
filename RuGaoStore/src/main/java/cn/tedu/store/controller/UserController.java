@@ -67,12 +67,14 @@ public class UserController extends BaseController {
 		// 获取服务器的工程真实路径
 		String path = session.getServletContext().getRealPath("/");
 		System.out.println(path);
-
-		// 上传图片
-		file.transferTo(new File(path, "/upload/" + file.getOriginalFilename()));
-		// 修改image
-		userService.updateImageById("/upload/" + file.getOriginalFilename(), this.getId(session));
-
+		try {
+			// 上传图片
+			file.transferTo(new File(path, "/upload/" + file.getOriginalFilename()));
+			// 修改image
+			userService.updateImageById("/upload/" + file.getOriginalFilename(), this.getId(session));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// 重新设置session中的user对象
 		User u = userService.getUserById(this.getId(session));
 		session.setAttribute("user", u);
@@ -94,20 +96,18 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/updateUser.do")
 	@ResponseBody
-	public ResponseResult<Void> updateUser(HttpSession session, String username, String email, String phone,
-			Integer gender) {
+	public ResponseResult<Void> updateUser(HttpSession session, String username, String email, String phone, Integer gender) {
 		ResponseResult<Void> rr = new ResponseResult<Void>();
 		try {
 			userService.updateUser(this.getId(session), username, email, phone, gender);
-
 			// 设置修改后的user对象
 			session.setAttribute("user", userService.getUserById(this.getId(session)));
-			rr.setState(1);
-			rr.setMessage("修改成功");
 		} catch (Exception e) {
 			rr.setState(0);
 			rr.setMessage(e.getMessage());
 		}
+		rr.setState(1);
+		rr.setMessage("修改成功");
 		return rr;
 	}
 

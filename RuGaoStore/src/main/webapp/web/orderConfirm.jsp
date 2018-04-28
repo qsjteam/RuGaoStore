@@ -17,9 +17,9 @@
 <!-- nav主导航-->
 <nav id="nav">
     <ul>
-        <li><a href="index.jsp" class="acti">首页</a></li>
-        <li><a href="index.jsp#computer" >电脑办公</a></li>
-        <li><a href="index.jsp#stationery" >办公文具</a></li>
+        <li><a href="${basePath}/main/showIndex.do" class="acti">首页</a></li>
+        <li><a href="${basePath}/main/showIndex.do#computer" >电脑办公</a></li>
+        <li><a href="${basePath}/main/showIndex.do#stationery" >办公文具</a></li>
     </ul>
 </nav>
 
@@ -40,7 +40,7 @@
 <div id="container" class="clear">
     <!--收货地址-->
     <div class="adress_choice">
-        <p>收货人信息<span class="rt" id="choose">新增收货地址</span></p>
+        <p>收货人信息</p>
         <c:forEach items="${listAddress}" var="address">
         <c:if test="${address.isDefault==1}">
         <div id="addresId1" class="base_select">
@@ -56,7 +56,7 @@
                 ${address.recvAddress}
                 ${address.recvPhone}
             </i>
-            <i class="user_site rt"> 设为默认地址  </i>
+            <i class="user_site rt" onclick="setDefault1(${address.id})"> 设为默认地址  </i>
         </div>
         </c:forEach>
         
@@ -225,27 +225,25 @@
         $('#payment').val(input_zj);
     });
     
-    //提交模态框地址信息
-    $(".save_recipient").click(function(){
-    	var data = {'receiverName':$('#receiverName').val(),
-    			'receiverState':$('#receiverState').val(),'receiverCity':$('#receiverCity').val(),'receiverDistrict':$('#receiverDistrict').val(),
-    	'receiverAddress':$('#receiverAddress').val(),'receiverPhone':$('#receiverPhone').val(),'receiverMobile':$('#receiverMobile').val(),
-    	'receiverZip':$('#receiverZip').val(),'addressName':$('#addressName').val()};
-    	console.log(data);
+  //定义函数,出来处理这为默认
+    function setDefault1(id){
+    	location="../address/setDefault.do?id="+id;
     	$.ajax({
-			"url" : "${pageContext.request.contextPath}/address/addAddress.do",
-			"data" : data,
-			"type" : "POST",
-			"dataType" : "json",
-			"success" : function(obj) {
-				alert(obj.message);
-				if (obj.state == 1) {
-					location.replace(location.href);
-				}
-			}
-		});
-    })
-
+    		"url":"../address/setDefault.do",
+    		"data":"id="+id,
+    		"type":"GET",
+    		"dataType":"json",
+    		"success":function(obj){
+    			if(obj.state){
+    				location.replace(location.href);
+    			}else{
+    				alert(obj.message);
+    			}
+    		}
+    	});
+    }
+    
+    
     $("#go_pay").click(function () {
     	var pa = total.toFixed(2);
     	var id = document.getElementById("product_name lf").attributes["name"].nodeValue;//$('#product_name lf').attr('name');

@@ -256,7 +256,6 @@
             <img src="${pageContext.request.contextPath}/images/footer/ios.png" class="lf">
             <img src="${pageContext.request.contextPath}/images/footer/android.png" alt="" class="lf"/>
         </div>
-        <div class="download"></div>
 		<!-- 页面底部-备案号 #footer -->
         <div class="record">
             &copy;2018  版权所有 川ICP证xxxxxxxxxxx

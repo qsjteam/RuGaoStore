@@ -35,6 +35,12 @@ public class User implements Serializable{
 		this.modifiedUser = modifiedUser;
 		this.modifiedTime = modifiedTime;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", phone="
+				+ phone + ", image=" + image + ", gender=" + gender + ", createdUser=" + createdUser + ", createdTime="
+				+ createdTime + ", modifiedUser=" + modifiedUser + ", modifiedTime=" + modifiedTime + "]";
+	}
 	public Integer getId() {
 		return id;
 	}

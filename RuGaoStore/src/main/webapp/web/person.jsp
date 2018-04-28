@@ -51,8 +51,7 @@
         </div>
 
         <!--个人信息具体内容 -->
-        <form id="person_form" method="post" 
-        		enctype="multipart/form-data">
+        <form id="person_form" method="post" enctype="multipart/form-data">
         <div class="rs_content">
             <!--头像-->
             <div class="rs_content_headPortrait" >
@@ -72,29 +71,22 @@
 	                <span class="change_headPortrait same_click" ></span>
 	            </div>
 	          </form>
-	         <form id="person_form" method="post">
+	         <form id="person_formxx" method="post">
             <!--用户名-->
             <div class="rs_content_username">
                 <span class="same">用户名：</span>
                 <span class="same rs_username">${user.username}</span>
-                <input class="ed_username" 
-                name="username"
-                id="username"
-                value="${user.username}" 
-                style="display: none;"/>
-                <span class="change_username same_click">更改用户名</span>
+                <input class="ed_username" name="username" id="username" value="${user.username}" style="display: none;"/>
             </div>
             <!--性别-->
             <div class="rs_content_sex" >
             	<span class="same">性别：</span>
-            	<input type="radio" 
-            	name="gender" id = "gender"
+            	<input type="radio" name="gender" id="gender"
             	<c:if test="${user.gender==0}">
             		checked="checked" 
             	</c:if>
             	value="0"> 女
-            	<input type="radio" 
-            	name="gender" id = "gender"
+            	<input type="radio" name="gender" id = "gender"
             	<c:if test="${user.gender==1}">
             		checked="checked" 
             	</c:if>
@@ -110,31 +102,23 @@
                 </span>
             </div>
             <!--绑定电话-->
-            <div class="rs_content_tel">
+            <div class="rs_content_phone">
                 <span class="same">绑定电话：</span>
-                <input type="text" 
-                name="phone"
-                id="phone"
-                value="${user.phone}"/>
+                <input class="ed_phone" name="phone" id="phone" value="${user.phone}" style="display: none;"/>
+                <span class="rs_phone">${user.phone}</span>
+                <span class="same_click change_phone">更改电话</span>
             </div>
+            
             <!--绑定邮箱-->
             <div class="rs_content_mail">
                 <span class="same">绑定邮箱：</span>
-                <input class="ed_email" 
-                name="email"
-                id="email"
-                value="${user.email}" 
-                style="display: none;"/>
+                <input class="ed_email" name="email" id="email" value="${user.email}" style="display: none;"/>
                 <span class="rs_mail">${user.email}</span>
                 <span class="same_click change_mail">更改邮箱</span>
             </div>
             <!--保存按钮-->
             <div class="save">
-           <a  
-           onClick="updatePerson()" 
-           style="color:#fff">
-               	保存更改
-            </a>
+           		<span onClick="updatePerson()" style="color:#fff"> 保存更改 </span>
             </div>
         </div>
         </form>
@@ -261,9 +245,6 @@
             <img src="${pageContext.request.contextPath}/images/footer/ios.png" class="lf">
             <img src="${pageContext.request.contextPath}/images/footer/android.png" alt="" class="lf"/>
         </div>
-        <div class="download">
-            <img src="${pageContext.request.contextPath}/images/footer/erweima.png">
-        </div>
 		<!-- 页面底部-备案号 #footer -->
         <div class="record">
             &copy;2018 版权所有 川ICP证xxxxxxxxxxx
@@ -286,9 +267,8 @@
 		var formData = new FormData();
 		var file = document.getElementById("file").files[0];
 		formData.append("file",file);
-		alert("file"+file);
 		$.ajax({
-			"url":"../user/uploadImage.do",
+			"url":"../user/upload.do",
 			"data":formData,
 			"type":"POST",
 			"dataType":"json",
@@ -296,6 +276,7 @@
 			"processData":false,
 			"success":function(obj){
 				alert(obj.state+obj.message);
+				location="${pageContext.request.contextPath}/user/showPerson.do";
 			}
 			
 		});
@@ -305,21 +286,20 @@
 //提交表单
 
 	function updatePerson(){
-		
+		var data = $("#person_formxx").serialize();
 		 $.ajax({
-			"url":"${pageContext.request.contextPath}/user/updatePerson.do",
-			"data":$("#person_form").serialize(),
+			"url":"${pageContext.request.contextPath}/user/updateUser.do",
+			"data":data,
 			"type":"POST",
 			"dataType":"json",
 			"success":function(obj){
 				if(obj.state==1){
+					alert(obj.message);
 					location="${pageContext.request.contextPath}/user/showPerson.do";
 				}else{
 					alert(obj.state+","+obj.message);
 				}
-				
 			}
-			
 		});  
 	}
 

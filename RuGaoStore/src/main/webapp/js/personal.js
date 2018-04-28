@@ -41,10 +41,11 @@ $(".save_recipient").click(function(){
 	var receiverAddress = $("#receiverAddress").val();// 
 	var receiverMobile = $("#receiverMobile").val();
 	if(receiverName && receiverState && receiverCity && receiverDistrict && receiverAddress && receiverMobile){
-		if($(".save_recipient").html()=="修改"){
+		if($(".save_recipient").html()=="修改收货人信息"){
+			var data = $("#update_form").serialize();
 			$.ajax({
 				"url":"../address/updateAddress.do",
-				"data":$("#addressForm").serialize(),
+				"data":data,
 				"type":"POST",
 				"dataType":"json",
 				"success":function(obj){
@@ -59,40 +60,38 @@ $(".save_recipient").click(function(){
 					$("#receiverZip").val("");
 					$("#addressName").val("");
 					//重新初始化省市区列表
-					getProrvinces(-1,-1,-1);
+					getProvince(-1,-1,-1);
 					//刷新地址信息
-					getAllAddress();
+					location.replace(location.href);
 					$(".save_recipient").html("保存收货人信息");
 				}
 				
 			});
 		}else{
 		
-		//添加收货地址
-		$.ajax({
-			"url":"../address/addAddress.do",
-			"data":$("#addressForm").serialize(),
-			"type":"POST",
-			"dataType":"json",
-			"success":function(obj){
-				alert(obj.state+","+obj.message);
-				$("#receiverName").val("");
-				$("#receiverState").val("");
-				$("#receiverCity").val("");
-				$("#receiverDistrict").val("");
-				$("#receiverAddress").val("");// 
-				$("#receiverMobile").val("");
-				$("#receiverPhone").val("");
-				$("#receiverZip").val("");
-				$("#addressName").val("");
-				//重新初始化省市区列表
-				getProrvinces(-1,-1,-1);
-				//刷新地址信息
-				getAllAddress();
-				
-			}
-			
-		});
+			//添加收货地址
+			$.ajax({
+				"url":"../address/addAddress.do",
+				"data":$("#update_form").serialize(),
+				"type":"POST",
+				"dataType":"json",
+				"success":function(obj){
+					alert(obj.state+","+obj.message);
+					$("#receiverName").val("");
+					$("#receiverState").val("");
+					$("#receiverCity").val("");
+					$("#receiverDistrict").val("");
+					$("#receiverAddress").val("");// 
+					$("#receiverMobile").val("");
+					$("#receiverPhone").val("");
+					$("#receiverZip").val("");
+					$("#addressName").val("");
+					//重新初始化省市区列表
+					getProvince(-1,-1,-1);
+					//刷新地址信息
+					location.replace(location.href);
+				}
+			});
 		}
 	}else{
 		alert("请将必填信息填写完整");
@@ -125,18 +124,6 @@ function setDefault(e){
 }
 
 
-$(function(){
-	$(".aco_delete").click(function(){
-		if(confirm("确定删除吗？")){
-			var url = "";
-			var param = "";
-			$.post(url,{data:param},function(data){
-				
-			},"json");
-		}
-		
-	})
-})
 
 
 /*****************************************************个人信息管理页面js********************************************************/
@@ -174,14 +161,16 @@ $(".women").click(function(){
 	}
 })
 /**
- * 更改用户名，变成可编辑状态
+ * 更改手机号，变成可编辑状态
  */
-$(".change_username").click(function(){
-	var parent = $(".change_username").parent();
-	$(parent).children(".rs_username").hide();
-	var name = $(parent).children(".rs_username").html();
-	$(parent).children(".ed_username").val(name);
-	$(parent).children(".ed_username").show();
+
+$(".change_phone").click(function(){
+	var parent = $(".change_phone").parent();
+	$(parent).children(".rs_phone").hide();
+	var phone = $(parent).children(".rs_phone").html();
+	console.log(phone)
+	$(parent).children(".ed_phone").val(phone);
+	$(parent).children(".ed_phone").show();
 })
 
 /**

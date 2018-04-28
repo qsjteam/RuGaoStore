@@ -39,7 +39,13 @@ public class AddressController extends BaseController {
 	@ResponseBody
 	public ResponseResult<Void> deleteAddress(Integer id) {
 		ResponseResult<Void> rr = new ResponseResult<Void>();
-		addressService.deleteAddress(id);
+		try {
+			addressService.deleteAddress(id);
+		} catch (Exception e) {
+			rr.setState(0);
+			rr.setMessage("不能删除默认地址");
+		}
+		
 		rr.setState(1);
 		rr.setMessage("删除成功");
 		return rr;

@@ -8,6 +8,8 @@ public class Province implements Serializable{
 	private Integer id;
 	private String provinceCode;
 	private String provinceName;
+	
+	
 	public Province(){
 		
 	}

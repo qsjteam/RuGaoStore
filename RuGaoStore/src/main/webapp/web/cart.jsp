@@ -17,9 +17,9 @@
 <!-- nav主导航-->
 <nav id="nav">
     <ul>
-        <li><a href="index.jsp" class="acti">首页</a></li>
-        <li><a href="index.jsp#computer" >电脑办公</a></li>
-        <li><a href="index.jsp#stationery" >办公文具</a></li>
+        <li><a href="${basePath}/main/showIndex.do" class="acti">首页</a></li>
+        <li><a href="${basePath}/main/showIndex.do#computer" >电脑办公</a></li>
+        <li><a href="${basePath}/main/showIndex.do#stationery" >办公文具</a></li>
     </ul>
 </nav>
 <div class="modal" style="display:none">
@@ -208,9 +208,6 @@
         <div class="service">
             <img src="${basePath}/images/footer/ios.png" class="lf">
             <img src="${basePath}/images/footer/android.png" alt="" class="lf"/>
-        </div>
-        <div class="download">
-            <img src="${basePath}/images/footer/erweima.png">
         </div>
 		<!-- 页面底部-备案号 #footer -->
         <div class="record">

@@ -98,9 +98,10 @@
                     <span class="lxdh lxdh_normal">${address.recvPhone}</span>
                     <span class="operation operation_normal">
                     	<span class="aco_change">
-                    	<a href="" onclick="getAddress(${address.id})" style="color:#2ea8ee">修改</a>
-                    	</span>|<span class="aco_delete">
-                    	<a href="" onclick="delAddress(${address.id})" style="color:#2ea8ee">删除</a>
+                    	<span onclick="getAddress(${address.id})" style="color:#2ea8ee">修改</span>
+                    	</span>|
+                    	<span class="aco_delete">
+                    	<span onclick="delAddress(${address.id})" style="color:#2ea8ee">删除</span>
                     	</span>
                     </span>
                     <span class="swmr swmr_normal"></span>
@@ -114,11 +115,11 @@
                     <span class="lxdh lxdh_normal">${address.recvPhone}</span>
                     <span class="operation operation_normal">
                     	<span class="aco_change">
-                    	<a href="#" onclick="getAddress(${address.id})" style="color:#2ea8ee">修改</a>
-                    	</span>|<span class="aco_delete">
-							<a href="#" onclick="delAddress(${address.id})" style="color:#2ea8ee">删除</a>
-                    	
-							</span>
+                    	<span onclick="getAddress(${address.id})" style="color:#2ea8ee">修改</span>
+                    	</span>|
+                    	<span class="aco_delete">
+							<span onclick="delAddress(${address.id})" style="color:#2ea8ee">删除</span>
+						</span>
                     </span>
                     <span class="swmr swmr_normal">
                     	<a onclick="setDefault1(${address.id})" >设为默认</a>
@@ -186,9 +187,6 @@
             <img src="${basePath}/images/footer/ios.png" class="lf">
             <img src="${basePath}/images/footer/android.png" alt="" class="lf"/>
         </div>
-        <div class="download">
-            <img src="${basePath}/images/footer/erweima.png">
-        </div>
 		<!-- 页面底部-备案号 #footer -->
         <div class="record">
             &copy;2018  版权所有 川ICP证xxxxxxxxxxx
@@ -206,7 +204,19 @@
 //定义函数,删除数据
 function delAddress(id){
 	if(confirm("确认要删除吗?")){
-		location="../address/deleteAddress.do?id="+id;
+		$.ajax({
+			"url":"../address/deleteAddress.do",
+			"data":"id="+id,
+			"type":"GET",
+			"dataType":"json",
+			"success":function(obj){
+				if(obj.state){
+					location.replace(location.href);
+				}else{
+					alert(obj.message);
+				}
+			}
+		});
 	}
 }
 
@@ -219,9 +229,7 @@ function getAddress(id){
 		"dataType":"json",
 		"success":function(obj){
 			if(obj.state==1){
-				debugger;
 				getProvince(obj.data.recvProvince,obj.data.recvCity,obj.data.recvArea);
-				debugger;
 				$("#update_form").attr("action","../address/updateAddress.do");
 				$("#receiverName").val(obj.data.recvName);
 				console.log("=------------------>"+obj.data.recvName);
@@ -231,10 +239,7 @@ function getAddress(id){
 				$("#addressName").val(obj.data.recvTag);
 				$("#receiverAddress").val(obj.data.recvAddress);
 				$("#id").val(obj.data.id);
-				
 				$(".save_recipient").html("修改收货人信息");
-				debugger;
-				
 			}
 		}
 		
@@ -242,9 +247,20 @@ function getAddress(id){
 }
 
 //定义函数,出来处理这为默认
-
 function setDefault1(id){
-	location="../address/setDefault.do?id="+id;
+	$.ajax({
+		"url":"../address/setDefault.do",
+		"data":"id="+id,
+		"type":"GET",
+		"dataType":"json",
+		"success":function(obj){
+			if(obj.state){
+				location.replace(location.href);
+			}else{
+				alert(obj.message);
+			}
+		}
+	});
 }
 
 //当城市列表发生变化,调用getArea函数
