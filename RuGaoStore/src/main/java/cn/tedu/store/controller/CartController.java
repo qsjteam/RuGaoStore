@@ -24,7 +24,7 @@ public class CartController extends BaseController {
 	@RequestMapping("/showCart.do")
 	public String showCart(HttpSession session, ModelMap map) {
 		List<CartVo> listCartVo = cartService.getCartByUid(this.getId(session));
-		map.addAttribute("listVo", listCartVo);
+		map.addAttribute("listCartVo", listCartVo);
 		return "cart";
 	}
 
