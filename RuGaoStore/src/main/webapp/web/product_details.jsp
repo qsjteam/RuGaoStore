@@ -85,18 +85,14 @@
         <p class="accountChose">
             <s>数量：</s>
             <button class="numberMinus">-</button>
-            <input 
-            type="text" 
-            value="1" 
-            class="number" 
-            id="buy-num">
+            <input type="text"  value="1" class="number" id="buy-num">
             <button class="numberAdd">+</button>
         </p>
         <!-- 购买部分-->
         <div class="shops">
-            <a href="cart.html" class="buy lf" id="buy_now">立即购买</a>
-            <a href="cart/addCart.do" class="shop lf" id="add_cart">
-            <img src="${basePath}/images/product_detail/product_detail_img7.png" alt=""/>
+            <a href="javascript:void(0)" class="buy lf" id="buy_now">立即购买</a>
+            <a href="javascript:void(0)" class="shop lf" id="add_cart">
+            	<img src="${basePath}/images/product_detail/product_detail_img7.png" alt=""/>
             	加入购物车
             </a>
         </div>
@@ -219,7 +215,7 @@
 <script src="${basePath}/js/jquery-3.1.1.min.js"></script>
 <script src="${basePath}/js/index.js"></script>
 
-<!--添加到购物车 立即购买 收藏部分-->
+<!--添加到购物车 立即购买 -->
 <script type="text/javascript">
     //加入购物车操作
     var color;
@@ -244,7 +240,7 @@
         buyAccount = $("#buy-num").val();
         console.log(buyAccount);
     }
-    $("#add_cart").click(function (e) {
+    $("#add_cart").click(function () {
     	var loc = location.href;
     	var n1 = loc.length;//地址的总长度
     	var n2 = loc.indexOf("=");//取得=号的位置
@@ -258,31 +254,18 @@
 			"success":function(obj){
 				if(obj.state==1){
 					alert(obj.message);
-					
+					location.replace(location.href);
 				}
 			},
 			"error":function(obj){
 				location="../user/showLogin.do";
 			}
 		});
-		
-		
     })
-    /**添加到收藏**/
-    $("#collect").click(function (e){
-        e.preventDefault();
-        getPro();
-          //如果未选择，请选择商品信息
-		if (!color || !norms ) {
-			alert("请选择宝贝的参数信息");
-        }else{
-            $(".modal").show();
-            $(".modal_information span").html("是否将您的宝贝加入收藏夹");
-        }
-    })
-    $('.no').click(function(){
-        $('.modal').hide();
-    })
+   function addCart(){
+    	
+    }
+    
 </script>
 <script>
     $(function () {
@@ -356,20 +339,36 @@
 
         /*立即购买*/
         $("#buy_now").click(function (e) {
+        	var color = $("#choose_color input.borderChange").val();
+            var model = $("#choose_model span.borderChange").html();
+            var num = $("#buy-num").val();
             //如果未选择，请选择商品信息
             if (color == undefined && norms == undefined) {
 //            $("#add_cart").text("加入购物车").css({"background":"#f5f5f5","color":"#000"})
                 alert("请选择商品信息");
             }else{
-                location.href="cart.html";
+            	var loc = location.href;
+            	var n1 = loc.length;//地址的总长度
+            	var n2 = loc.indexOf("=");//取得=号的位置
+            	var id = decodeURI(loc.substr(n2+1, n1-n2));//从=号后面的内容
+        		//异步提交
+        		$.ajax({
+        			"url":"../cart/addCart.do",
+        			"data":"goodsId="+id+"&count="+$("#buy-num").val(),
+        			"type":"GET",
+        			"dataType":"json",
+        			"success":function(obj){
+        				if(obj.state==1){
+        					location.href="${basePath}/cart/showCart.do";
+        				}
+        			},
+        			"error":function(obj){
+        				location="../user/showLogin.do";
+        			}
+        		});
+                
             }
             e.preventDefault();
-            var color = $("#choose_color input.borderChange").val();
-            var model = $("#choose_model span.borderChange").html();
-            var num = $("#buy-num").val();
-            // 后台需要的参数
-            // var url = '/toOrder/'+${item.id}+'.html?&num='+num+'&itemColor='+color+'&itemModel='+model;
-//             window.location.href = url;
         })
     })
 </script>
@@ -413,10 +412,7 @@
 				 $('#mImg').attr('src',eval("'.."+data.image+"'"));
 				 $('#Tname').html(data.title);
 				 $('#Pr').html("￥"+data.price);
-				 
-				 
 			}
-			
 		})
 	}
 </script>

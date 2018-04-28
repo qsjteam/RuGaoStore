@@ -13,6 +13,7 @@ import com.qsj.mapper.GoodsMapper;
 public class GoodsService implements IGoodsService{
 	@Resource
 	private GoodsMapper goodsMapper;
+	
 	public List<Goods> getGoodsByCategoryId(Integer categoryId, Integer offset, Integer count) {
 		
 		return goodsMapper.select(categoryId, offset, count);
