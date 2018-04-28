@@ -56,15 +56,11 @@
                 ${address.recvAddress}
                 ${address.recvPhone}
             </i>
-            <i class="user_site rt">
-                设为默认地址
-            </i>
+            <i class="user_site rt"> 设为默认地址  </i>
         </div>
         </c:forEach>
         
-        <a id="more" href="javascript:void(0);">
-            更多地址 &gt;&gt;
-        </a>
+        <a id="more" href="javascript:void(0);"> 更多地址 &gt;&gt; </a>
     </div>
     <!-- 商品信息-->
     <form name="" method="post" action="#">
@@ -88,10 +84,15 @@
                     <i>专属价</i>
                     <br/>
                     <span class="pro_price">￥
-                    <span class="ppp_price">${cartVo.price}</span></span>
+                   		<span class="ppp_price">${cartVo.price}</span>
+                    </span>
                 </li>
-                <li class="p_count">X<span>${cartVo.count}</span></li>
-                <li class="p_tPrice">￥<span></span></li>
+                <li class="p_count">X
+                	<span>${cartVo.count}</span>
+                </li>
+                <li class="p_tPrice">￥
+               		<span></span>
+                </li>
             </ul>
             </c:forEach>
         </div>
@@ -230,7 +231,7 @@
     $(".save_recipient").click(function(){
     	var data = {'receiverName':$('#receiverName').val(),
     			'receiverState':$('#receiverState').val(),'receiverCity':$('#receiverCity').val(),'receiverDistrict':$('#receiverDistrict').val(),
-    	'receiverAddress':$('#receiverAddress').val(),'receiverMobile':$('#receiverMobile').val(),
+    	'receiverAddress':$('#receiverAddress').val(),'receiverPhone':$('#receiverPhone').val(),'receiverMobile':$('#receiverMobile').val(),
     	'receiverZip':$('#receiverZip').val(),'addressName':$('#addressName').val()};
     	console.log(data);
     	$.ajax({

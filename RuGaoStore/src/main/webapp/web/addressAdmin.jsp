@@ -33,7 +33,7 @@
 <!-- 我的订单导航栏-->
 <div id="nav_order">
     <ul>
-        <li><a href="index.jsp">首页<span>&gt;</span>个人中心</a></li>
+        <li><a href="${basePath}/main/showIndex.do">首页<span>&gt;</span>个人中心</a></li>
     </ul>
 </div>
 <!--我的订单内容区域 #container-->
@@ -48,7 +48,7 @@
         </div>
         <!--收货人信息填写栏-->
         <div class="rs_content">
-        	<form id="update_form" method="post" action="../address/add.do">
+        	<form id="update_form" method="post" action="../address/addAddress.do">
 	            <input type="hidden" name="id" id="id">
 	            <!--收货人姓名-->
 	            <div class="recipients">
@@ -98,9 +98,9 @@
                     <span class="lxdh lxdh_normal">${address.recvPhone}</span>
                     <span class="operation operation_normal">
                     	<span class="aco_change">
-                    	<a href="#" onclick="getAddress(${address.id})" style="color:#2ea8ee">修改</a>
+                    	<a href="" onclick="getAddress(${address.id})" style="color:#2ea8ee">修改</a>
                     	</span>|<span class="aco_delete">
-                    	<a href="#" onclick="delAddress(${address.id})" style="color:#2ea8ee">删除</a>
+                    	<a href="" onclick="delAddress(${address.id})" style="color:#2ea8ee">删除</a>
                     	</span>
                     </span>
                     <span class="swmr swmr_normal"></span>
@@ -213,14 +213,18 @@ function delAddress(id){
 //定义函数,显示要修改的数据
 function getAddress(id){
 	$.ajax({
-		"url":"../address/getAddress.do",
+		"url":"../address/getAddressById.do",
 		"data":"id="+id,
 		"type":"GET",
 		"dataType":"json",
 		"success":function(obj){
 			if(obj.state==1){
+				debugger;
+				getProvince(obj.data.recvProvince,obj.data.recvCity,obj.data.recvArea);
+				debugger;
+				$("#update_form").attr("action","../address/updateAddress.do");
 				$("#receiverName").val(obj.data.recvName);
-
+				console.log("=------------------>"+obj.data.recvName);
 				$("#receiverMobile").val(obj.data.recvPhone);
 				$("#receiverPhone").val(obj.data.recvTel);
 				$("#receiverZip").val(obj.data.recvZip);
@@ -228,9 +232,9 @@ function getAddress(id){
 				$("#receiverAddress").val(obj.data.recvAddress);
 				$("#id").val(obj.data.id);
 				
-				getProvince(obj.data.recvProvince,obj.data.recvCity,obj.data.recvArea);
 				$(".save_recipient").html("修改收货人信息");
-				$("#update_form").attr("action","../address/updateAddress.do");
+				debugger;
+				
 			}
 		}
 		
@@ -238,6 +242,7 @@ function getAddress(id){
 }
 
 //定义函数,出来处理这为默认
+
 function setDefault1(id){
 	location="../address/setDefault.do?id="+id;
 }

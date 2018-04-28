@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,11 @@ public class AddressController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/showAddress.do")
-	public String showAddress() {
+	public String showAddress(HttpSession session,Integer id,ModelMap map) {
+		// 获取地址的集合
+		List<Address> listAddress = addressService.getAddressByUid(this.getId(session));
+		// 设置listAddress到map中
+		map.addAttribute("listAddress", listAddress);
 		return "addressAdmin";
 	}
 
@@ -63,7 +68,12 @@ public class AddressController extends BaseController {
 		address.setRecvTel(recvTel);
 		address.setRecvZip(recvZip);
 		address.setRecvTag(recvTag);
-		addressService.updateAddressById(address);
+		try {
+			addressService.updateAddressById(address);
+		} catch (Exception e) {
+			rr.setState(0);
+			rr.setMessage("修改失败");
+		}
 		rr.setState(1);
 		rr.setMessage("修改成功");
 		return rr;
@@ -73,6 +83,7 @@ public class AddressController extends BaseController {
 	@ResponseBody
 	public ResponseResult<Address> getAddressById(Integer id) {
 		ResponseResult<Address> rr = new ResponseResult<Address>();
+		rr.setState(1);
 		rr.setData(addressService.getAddressById(id));
 		return rr;
 	}
