@@ -3,14 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
   
-<mapper namespace="cn.tedu.store.mapper.UserMapper">
+<mapper namespace="com.qsj.mapper.UserMapper">
 	<!-- 根据id修改image -->
-	<!-- 
-	void updateImageById(
-			@Param("image") String image,
-			@Param("id") Integer id);
-	 -->
-	 
 	 <update id="updateImageById">
 	update t_user
 	set image = #{image}
@@ -18,10 +12,7 @@
 	 </update>
 	
 	<!-- 通过id查询 -->
-	<!-- User selectById(Integer id) -->
-	
-	<select id="selectById" 
-			resultType="cn.tedu.store.bean.User">
+	<select id="selectById" resultType="com.qsj.bean.User">
 		select 	
 			id,username,password,email,phone,
 			image,gender,
@@ -38,7 +29,7 @@
 	
 	<!-- 修改用户信息 -->
 	<!-- void update(User user -->
-	<update id="update" parameterType="cn.tedu.store.bean.User">
+	<update id="update" parameterType="com.qsj.bean.User">
 		update 
 			t_user
 		set 
@@ -61,10 +52,7 @@
 	</update>
 	
 	<!-- 通过phone查询 -->
-	<!-- Integer selectByPhone(String phone); -->
-	
-	<select id="selectByPhone" 
-			resultType="java.lang.Integer">
+	<select id="selectByPhone" resultType="java.lang.Integer">
 		select
 			count(phone)
 		from
@@ -74,9 +62,7 @@
 	</select>
 	
 	<!-- 通过email查询 -->
-	<!-- Integer selectByEmail(String email); -->
-	<select id="selectByEmail" 
-			resultType="java.lang.Integer">
+	<select id="selectByEmail" resultType="java.lang.Integer">
 		select
 			count(email)
 		from
@@ -86,9 +72,7 @@
 	</select>
 	
 	<!-- 通过用户名查询 -->
-	<!-- User selectByUsername(String username); -->
-	<select id="selectByUsername"
-			resultType="cn.tedu.store.bean.User">
+	<select id="selectByUsername" resultType="com.qsj.bean.User">
 			select 	
 			id,username,password,email,phone,
 			image,gender,
@@ -105,8 +89,7 @@
 	
 	
 	<!-- 添加用户信息 -->
-	<!-- void insert(User user); -->
-	<insert id="insert" parameterType="cn.tedu.store.bean.User">
+	<insert id="insert" parameterType="com.qsj.bean.User">
 		insert into t_user(
 			username,password,email,phone,
 			image,gender,created_user,

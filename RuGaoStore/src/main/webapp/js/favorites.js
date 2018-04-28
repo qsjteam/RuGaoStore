@@ -1,6 +1,5 @@
-/**
- * Created by ttssiw on 2017/1/3.
- */
+
+
 //管理收藏夹
 $('.manage').click(function(){
     if($('.manage span').hasClass('normal')){

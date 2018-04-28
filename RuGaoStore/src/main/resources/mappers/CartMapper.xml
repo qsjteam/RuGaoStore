@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
   
-<mapper namespace="cn.tedu.store.mapper.CartMapper">
+<mapper namespace="com.qsj.mapper.CartMapper">
 	<!-- 根据id修改购物车商品的数量 -->
 	<!-- void updateCountById(@Param("id") Integer id,
 			@Param("count") Integer count); -->
@@ -35,7 +35,7 @@
 	<!-- 查询登录用户的购物车 -->
 	<!-- List<CartVo> selectCart(Integer uid); -->
 	
-	<select id="selectCart" resultType="cn.tedu.store.vo.CartVo">
+	<select id="selectCart" resultType="com.qsj.vo.CartVo">
 		select
 			t_cart.id as id,
 			t_cart.uid as uid,
@@ -55,7 +55,7 @@
 	
 	<!-- 插入数据 -->
 	<!-- void insertCart(Cart cart) -->
-	<insert id="insertCart" parameterType="cn.tedu.store.bean.Cart">
+	<insert id="insertCart" parameterType="com.qsj.bean.Cart">
 		insert into t_cart(
 				uid,goods_id,count,
 				created_user,created_time,
@@ -67,20 +67,4 @@
 			)
 	</insert>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

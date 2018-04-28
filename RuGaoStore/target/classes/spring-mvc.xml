@@ -24,12 +24,10 @@
    <!-- Spring MVC -->
    
 		<!-- 配置组件扫描 -->
-		<context:component-scan 
-			base-package="cn.tedu.store.controller" />
+		<context:component-scan base-package="com.qsj.controller" />
 			
 		<!-- 配置ViewResolver -->
-		<bean 
-			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 			<property name="prefix" value="/web/" />
 			<property name="suffix" value=".jsp" />
 		</bean>
@@ -50,9 +48,7 @@
 				<mvc:exclude-mapping path="/user/checkPhone.do"/>
 				<mvc:exclude-mapping path="/user/showLogin.do"/>
 				<mvc:exclude-mapping path="/user/login.do"/>
-				
-				
-				<bean class="cn.tedu.store.interceptor.LoginInterceptor"/>
+				<bean class="com.qsj.interceptor.LoginInterceptor"/>
 			</mvc:interceptor>
 		</mvc:interceptors>
 	<!-- 定义文件上传组件解析器 -->

@@ -1,6 +1,3 @@
-/**
- * Created by yy on 2016/12/15.
- */
 
 $("#leftsidebar_box dt").css({"background-color":" #0AA1ED"});
 $(function(){

@@ -1,0 +1,139 @@
+package com.qsj.service;
+
+import java.util.Date;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.qsj.bean.User;
+import com.qsj.mapper.UserMapper;
+import com.qsj.service.ex.PasswordNotMatchException;
+import com.qsj.service.ex.ServiceException;
+import com.qsj.service.ex.UserNameAlreadyExsitException;
+import com.qsj.service.ex.UserNotFoundException;
+
+@Service
+public class UserService implements IUserService {
+	@Resource
+	private UserMapper userMapper;
+	@Value("#{dbConfig.salt}")
+	private String salt;
+
+	public void register(User user) {
+		// 判断用户名是否存在，如果不存在 ，实现插入数据的操作
+		// 否则，抛出异常。
+		if (userMapper.selectByUsername(user.getUsername()) == null) {
+
+			String newp = DigestUtils.md5Hex(user.getPassword() + salt);
+
+			user.setPassword(newp);
+
+			userMapper.insert(user);
+		} else {
+			throw new UserNameAlreadyExsitException("用户名已经存在");
+		}
+
+	}
+
+	public boolean checkEmail(String email) {
+		/*
+		 * 如果邮箱存在，返回true，否则返回false
+		 */
+		return userMapper.selectByEmail(email) > 0;
+	}
+
+	public boolean checkPhone(String phone) {
+
+		return userMapper.selectByPhone(phone) > 0;
+	}
+
+	public boolean checkUsername(String username) {
+		// 调用selectByUsername(username);
+		User user = userMapper.selectByUsername(username);
+		// 判断返回值是否为null
+		if (user == null) {
+			// 如果为null，返回false
+			return false;
+		} else {
+			// 否则 返回true
+			return true;
+		}
+	}
+
+	public User login(String username, String password) {
+
+		System.out.println("login.......");
+
+		// 1.调用持久层selectByUsername()方法，返回值User
+		User user = userMapper.selectByUsername(username);
+		// 2.判断user对象是否为null
+		if (user == null) {
+			// 3.如果为null，常抛出异UserNotFoundException
+			throw new UserNotFoundException("该用户不存在");
+		} else {
+			// 4.如果不为null,从user对象中取出password，用password和页面输入的password比较；
+			String newP = DigestUtils.md5Hex(password + salt);
+			if (user.getPassword().equals(newP)) {
+				// 5.如果是true，返回user
+				return user;
+			} else {
+				// 6.如果false，抛出异常PasswordNotMatchException
+				throw new PasswordNotMatchException("密码错误");
+			}
+		}
+
+	}
+
+	public void changePassword(Integer id, String oldPwd, String newPwd) {
+		// 1.调用selectById(id),返回user对象
+		User user = userMapper.selectById(id);
+		// 2.判断（user!=null）,获取密码
+		if (user != null) {
+			// 3.获取密码和oldPwd进行判断
+			String newOpwd = DigestUtils.md5Hex(oldPwd + salt);
+
+			if (user.getPassword().equals(newOpwd)) {
+				// 4.如果结果返回true
+				User u = new User();
+				u.setId(id);
+				u.setPassword(DigestUtils.md5Hex(newPwd + salt));
+				// 5.调用持久层 update（u）
+				userMapper.update(u);
+			} else {
+				// 6.返回false，抛出异常PasswordNotMatchException("")
+				throw new PasswordNotMatchException("密码错误");
+			}
+		}
+
+	}
+
+	public void updateUser(Integer id, String username, String email, String phone, Integer gender) {
+		User user = new User();
+		user.setUsername(username);
+		user.setId(id);
+		user.setEmail(email);
+		user.setPhone(phone);
+		user.setGender(gender);
+		user.setModifiedUser(username);
+		user.setModifiedTime(new Date());
+		System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::"+user);
+		try {
+			userMapper.update(user);
+		} catch (ServiceException e) {
+			throw new ServiceException("修改失败");
+		}
+	}
+
+	public User getUserById(Integer id) {
+		// 返回user对象
+		return userMapper.selectById(id);
+	}
+
+	public void updateImageById(String image, Integer id) {
+		userMapper.updateImageById(image, id);
+	}
+
+}

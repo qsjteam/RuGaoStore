@@ -1,6 +1,4 @@
-/**
- * Created by ttssiw on 2017/1/16.
- */
+
 $(function(){
     $(window).scroll(function(){
         if($(document).scrollTop()>=350){

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
   
-<mapper namespace="cn.tedu.store.mapper.GoodsCategoryMapper">
+<mapper namespace="com.qsj.mapper.GoodsCategoryMapper">
 	<!-- 查询商品分类信息 -->
 	<!-- 
 	List<GoodsCategory> selectCategoryByParentId(
@@ -9,8 +9,7 @@
 		@Param("offset") Integer offset,
 		@Param("count") Integer count);
 	 -->
-	<select id="selectCategoryByParentId"      
-			resultType="cn.tedu.store.bean.GoodsCategory">
+	<select id="selectCategoryByParentId" resultType="com.qsj.bean.GoodsCategory">
 		select 
 			id,
 			parent_id as parentId,
@@ -34,20 +33,3 @@
 		
 	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

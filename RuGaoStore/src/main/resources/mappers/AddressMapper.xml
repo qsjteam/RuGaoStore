@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.tedu.store.mapper.AddressMapper">
+<mapper namespace="com.qsj.mapper.AddressMapper">
 	<!-- 删除收货diz -->
 	<!-- void deleteById(Integer id); -->
 	
@@ -12,7 +12,7 @@
 	
 	<!-- 通过id修改收货地址的其他信息 -->
 	<!-- void updateById(Address address); -->
-	<update id="updateById" parameterType="cn.tedu.store.bean.Address">
+	<update id="updateById" parameterType="com.qsj.bean.Address">
 		update 
 			t_address
 		set
@@ -32,8 +32,7 @@
 	<!-- 通过id查询收货地址信息 -->
 	<!-- Address selectAddressById(Integer id); -->
 	
-	<select id="selectAddressById" parameterType="int"
-				resultType="cn.tedu.store.bean.Address">
+	<select id="selectAddressById" parameterType="int" resultType="com.qsj.bean.Address">
 		select 
 			id,uid,recv_name as recvName,
 			recv_province as recvProvince,
@@ -81,7 +80,7 @@
 	
 	<!-- 查询登录人的收货地址 -->
 	<!-- List<Address> selectByUid(Integer uid); -->
-	<select id="selectByUid" parameterType="int" resultType="cn.tedu.store.bean.Address">
+	<select id="selectByUid" parameterType="int" resultType="com.qsj.bean.Address">
 		select
 			id,uid,recv_name as recvName,
 			recv_province as recvProvince,
@@ -107,7 +106,7 @@
 	<!-- 插入数据 -->
 	<!-- void insert (Address address); -->
 	
-	<insert id="insert" parameterType="cn.tedu.store.bean.Address">
+	<insert id="insert" parameterType="com.qsj.bean.Address">
 		insert into t_address(
 			uid,recv_name,
 			recv_province,
@@ -132,20 +131,3 @@
 	</insert> 
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

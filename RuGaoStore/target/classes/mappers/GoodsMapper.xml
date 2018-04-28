@@ -3,11 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
   
-<mapper namespace="cn.tedu.store.mapper.GoodsMapper">
+<mapper namespace="com.qsj.mapper.GoodsMapper">
 	<!-- 根据id修改数量 -->
-	<!-- void updateNumById(@Param("id") String id,
-			@Param("num") Integer num); -->
-	
 	<update id="updateNumById">
 		update 
 			t_goods
@@ -18,9 +15,7 @@
 	</update>
 	
 	<!-- 通过id查询商品信息 -->
-	<!-- Goods selectGoodsById(Integer id); -->
-	<select id="selectGoodsById" 
-	      resultType="cn.tedu.store.bean.Goods">
+	<select id="selectGoodsById" resultType="com.qsj.bean.Goods">
 	select
 		id,
 		category_id as categoryId,
@@ -58,14 +53,7 @@
 	
 	
 	<!-- 查询热门商品信息 -->
-	<!-- 
-	List<Goods> select(
-			@Param("categoryId") Integer categoryId,
-			@Param("offset") Integer offset,
-			@Param("count") Integer count);
-	-->
-	
-	<select id="select" resultType="cn.tedu.store.bean.Goods">
+	<select id="select" resultType="com.qsj.bean.Goods">
 	select
 		id,
 		category_id as categoryId,
@@ -93,20 +81,4 @@
 	</select>
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
