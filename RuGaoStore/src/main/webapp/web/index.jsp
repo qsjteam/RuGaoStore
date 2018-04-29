@@ -82,7 +82,12 @@
         </div>
         <!-- 上面部分右侧区域-->
         <div class="right lf">
-            <div class="right_pro lf" style="z-index:1">
+            <span style="height:116px; width:292px;">
+            	<a href="${pageContext.request.contextPath}/main/product_details.do?id=100000422" style="margin-top: 100px;">
+            		<img src="${pageContext.request.contextPath}/images/itemCat/study_computer_img2.png" alt="" style="height:116px; width:292px;padding-top: 190px;"/>
+            	</a>
+            </span>
+            <div class="right_pro lf" style="margin-top: -150px;">
                 <p class="top_ys1">如皋特产董糖</p>
                 <p class="top_ys2">
 					正宗如皋特产景福斋董糖320克
@@ -92,14 +97,13 @@
                 <p class="top_ys3">￥32.00</p>
                 <p class="top_ys4 color_2"><a href="${pageContext.request.contextPath}/main/product_details.do?id=100000422">查看详情</a></p><!-- TODO//TODO  -->
             </div>
-            <span style="height:116px; width:292px;margin-bottom: 0px;"><a href="${pageContext.request.contextPath}/main/product_details.do?id=100000422"><img src="${pageContext.request.contextPath}/images/itemCat/study_computer_img2.png" alt="" style="height:116px; width:292px;"/></a></span>
         </div>
     </div>
    <div class="lf1_bottom">
         <div class="item_cat lf">
             <div class="cat_header color_2">
                 <span>
-                    <img src="${pageContext.request.contextPath}/images/itemCat/stationery_icon1.png" alt=""/>
+                    <img src="" alt=""/>
                     	特产礼品/1F
                 </span>
             </div>

@@ -5,10 +5,11 @@
     <div id="logo" class="lf">
     </div>
     <div id="top_input" class="lf">
-        <input id="input" type="text" placeholder="请输入您要搜索的内容" style="width:360px" value="${title}"/>
+    	<h1 style="color: #0aa1ed;">江苏如皋特产特色网站</h1>
+        <%-- <input id="input" type="text" placeholder="请输入您要搜索的内容" style="width:360px" value="${title}"/>
         <a  class="rt"  onclick="search1()">
         	<img id="search" src="${pageContext.request.contextPath}/images/header/search.png" alt="搜索"/>
-        </a>
+        </a> --%>
     </div>
     <div class="rt">
         <ul class="lf">
