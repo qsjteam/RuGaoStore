@@ -16,8 +16,8 @@
 <nav id="nav">
     <ul>
         <li><a href="${basePath}/main/showIndex.do" class="acti">首页</a></li>
-        <li><a href="${basePath}/main/showIndex.do#computer" >电脑办公</a></li>
-        <li><a href="${basePath}/main/showIndex.do#stationery" >办公文具</a></li>
+        <li><a href="${basePath}/main/showIndex.do#computer" >特产礼品</a></li>
+        <li><a href="${basePath}/main/showIndex.do#stationery" >风味美食</a></li>
     </ul>
 </nav>
 <!--404-->

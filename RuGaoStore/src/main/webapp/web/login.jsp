@@ -18,7 +18,7 @@
 	<!-- 页面顶部-->
 	<header id="top">
 		<div class="top">
-			<span>欢迎登录</span>
+			<span>欢迎登录如皋特色美食网站</span>
 		</div>
 	</header>
 	<div id="container">

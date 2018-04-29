@@ -18,7 +18,7 @@
 	<!-- 页面顶部-->
 	<header id="top">
 		<div class="top">
-			<span>欢迎注册</span>
+			<span>江苏如皋  欢迎您</span>
 		</div>
 	</header>
 	<div class="parent">

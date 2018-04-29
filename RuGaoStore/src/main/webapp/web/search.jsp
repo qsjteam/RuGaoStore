@@ -1,6 +1,5 @@
-<%@ page contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -16,9 +15,9 @@
 <!-- nav主导航-->
 <nav id="nav">
     <ul>
-        <li><a href="${basePath}/main/showIndex.do" class="acti">首页</a></li>
-        <li><a href="${basePath}/main/showIndex.do#computer" >电脑办公</a></li>
-        <li><a href="${basePath}/main/showIndex.do#stationery" >办公文具</a></li>
+        <li><a href="../main/showIndex.do" class="acti">首页</a></li>
+        <li><a href="../main/showIndex.do#computer" >特产礼品</a></li>
+        <li><a href="../main/showIndex.do#stationery" >风味美食</a></li>
     </ul>
 </nav>
 
@@ -26,7 +25,7 @@
 	<div class="big" style="height:1000px">
 		<form name="" action="" method="post">
 			<section id="section">
-				<p class="header">全部结果>笔记本</p>
+				<p class="header">全部结果></p>
 				<div id="wrap">
 				<c:forEach items="${listGoods}" var="goods">
 					<div class="lf box" id="d1" style="width:220px;height:240px">
@@ -82,9 +81,6 @@
 		</a> 
 	</c:forEach>
 	</div>
-	
-	
-	
 	<!-- 尾部-->
 <!-- 页面底部-->
 <div class="foot_bj">

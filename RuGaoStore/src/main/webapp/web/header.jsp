@@ -5,16 +5,9 @@
     <div id="logo" class="lf">
     </div>
     <div id="top_input" class="lf">
-        <input 
-        id="input" 
-        type="text" 
-        placeholder="请输入您要搜索的内容" 
-        style="width:360px"
-        value="${title}"/>
-        <a  
-        		class="rt" 
-        	onclick="search1()">
-        <img id="search" src="${pageContext.request.contextPath}/images/header/search.png" alt="搜索"/>
+        <input id="input" type="text" placeholder="请输入您要搜索的内容" style="width:360px" value="${title}"/>
+        <a  class="rt"  onclick="search1()">
+        	<img id="search" src="${pageContext.request.contextPath}/images/header/search.png" alt="搜索"/>
         </a>
     </div>
     <div class="rt">
@@ -34,8 +27,7 @@
 </header>
 <script>
 	function search1(){
-		
-		location="${pageContext.request.contextPath}/goods/showGoodsByTitle.do?title="+$("#input").val();
+		location="${pageContext.request.contextPath}/goods/showSearch.do?title="+$("#input").val();//showGoodsByTitle.do
 	}
 </script>
 

@@ -21,9 +21,9 @@
 <!-- nav主导航-->
 <nav id="nav">
     <ul>
-        <li><a href="index.jsp" class="acti">首页</a></li>
-        <li><a href="index.jsp#computer" >电脑办公</a></li>
-        <li><a href="index.jsp#stationery" >办公文具</a></li>
+        <li><a href="${pageContext.request.contextPath}/main/showIndex.do" class="acti">首页</a></li>
+        <li><a href="${pageContext.request.contextPath}/main/showIndex.do#computer" >特产礼品</a></li>
+        <li><a href="${pageContext.request.contextPath}/main/showIndex.do#stationery" >风味美食</a></li>
     </ul>
 </nav>
 <!-- 我的订单导航栏-->

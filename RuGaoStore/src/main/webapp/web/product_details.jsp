@@ -20,14 +20,14 @@
 <nav id="nav">
     <ul>
         <li><a href="${basePath}/main/showIndex.do" class="acti">首页</a></li>
-        <li><a href="${basePath}/main/showIndex.do#computer" >电脑办公</a></li>
-        <li><a href="${basePath}/main/showIndex.do#stationery" >办公文具</a></li>
+        <li><a href="${basePath}/main/showIndex.do#computer" >特产礼品</a></li>
+        <li><a href="${basePath}/main/showIndex.do#stationery" >风味美食</a></li>
     </ul>
 </nav>
 <!-- 内容-->
 <!--细节导航-->
 <div id="nav_detail">
-    <h5>首页 > 学习用品 > 笔记本电脑 ><span id="Gname"></span></h5>
+    <h5>首页 > <span id="Gname"></span></h5>
 </div>
 <!--产品预览-->
 <div id="shop_detail">
@@ -68,16 +68,13 @@
         </p>
         <!-- 颜色-->
         <p class="style" id="choose_color">
-            <s class="color">颜色：</s>
-            <input type="button" class="i1" value="黑色" title="黑色"/>
-            <input type="button" class="i2" value="灰色" title="灰色"/>
-            <input type="button" class="i3" value="金色" title="金色"/>
-            <input type="button" class="i4" value="白色" title="白色"/>
+            <s class="color">口味：</s>
+            <input type="button" class="i1" value="原味" title="原味"/>
         </p>
         <!-- 规格-->
         <p>
-             <s>套餐：</s>
-            <span class="avenge">标配</span>
+             <s>配送：</s>
+            <span class="avenge">普通快递</span>
         </p>
         <!-- 未选择规格，颜色时状态-->
         <div class="message"></div>
@@ -407,6 +404,7 @@
 			dataType:"json",
 			success : function(obj) {
 				var data=obj.data;
+				console.log(data.image);
 				console.log(data.itemType);
 				 $('#Gname').html(data.itemType);
 				 $('#mImg').attr('src',eval("'.."+data.image+"'"));
